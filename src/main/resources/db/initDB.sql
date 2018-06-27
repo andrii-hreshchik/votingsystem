@@ -32,10 +32,15 @@ CREATE TABLE user_roles
 CREATE TABLE restaurants
 (
   id          INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
+  title       VARCHAR                 NOT NULL,
   description TEXT                    NOT NULL,
   --   rating      INTEGER                 NOT NULL,
   date_time   TIMESTAMP DEFAULT now() NOT NULL
 );
+
+CREATE UNIQUE INDEX restaurant_unique_title_index
+  ON restaurants (title);
+
 
 CREATE TABLE votes
 (
@@ -46,6 +51,9 @@ CREATE TABLE votes
   FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
   FOREIGN KEY (restaurant_id) REFERENCES restaurants (id) ON DELETE CASCADE
 );
+
+CREATE UNIQUE INDEX votes_unique_user_datetime_idx
+  ON votes (user_id, date_time);
 
 CREATE TABLE meals
 (

@@ -24,10 +24,10 @@ INSERT INTO user_roles (user_id, role) VALUES
   (100005, 'ROLE_ADMIN'),
   (100006, 'ROLE_ADMIN');
 
-INSERT INTO restaurants (description, date_time) VALUES
-  ('Ресторан1', '2018-04-18 10:00:00'),
-  ('Ресторан2', '2018-05-20 10:00:00'),
-  ('Ресторан3', '2018-06-23 10:00:00');
+INSERT INTO restaurants (title, description, date_time) VALUES
+  ('Ресторан1', 'Описание Ресторан1', '2018-04-18 10:00:00'),
+  ('Ресторан2', 'Описание Ресторан2', '2018-05-20 10:00:00'),
+  ('Ресторан3', 'Описание Ресторан3', '2018-06-23 10:00:00');
 
 INSERT INTO meals (restaurant_id, description, price, date_time) VALUES
   (100007, 'Ресторан1 блюдо1', 80, '2018-06-23 12:00:00'),
