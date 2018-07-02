@@ -97,7 +97,6 @@ public class Restaurant extends AbstractBaseEntity {
                 ", dateTime=" + dateTime +
                 ", meals=" + meals +
                 ", votes=" + votes +
-
                 '}';
     }
 }

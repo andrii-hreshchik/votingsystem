@@ -13,45 +13,47 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
 
-
     @Autowired
-    UserRepository repository;
+    UserRepository userRepository;
 
     @Override
     public User create(User user) {
         Assert.notNull(user, "user must be not null");
         //prepare to save
-        return repository.save(user);
+        return userRepository.save(user);
     }
 
     @Override
     public User get(int id) throws NotFoundException {
-        return repository.findById(id).orElse(null);
+        return userRepository.findById(id).orElse(null);
     }
 
     @Override
     public void update(User user) {
-
+        //checkNotFound
+        Assert.notNull(user, "user must not be null");
+        userRepository.save(user);
     }
 
     @Override
     public void delete(int id) throws NotFoundException {
-        repository.delete(id);
+        userRepository.delete(id);
 
     }
 
     @Override
     public User getByEmail(String email) throws NotFoundException {
-        return repository.getByEmail(email);
+        Assert.notNull(email, "email must not be null");
+        return userRepository.getByEmail(email);
     }
 
     @Override
     public List<User> getAll() {
-        return repository.findAll();
+        return userRepository.findAll();
     }
 
     @Override
     public User getWithVotes(int id) {
-        return repository.getWithVotes(id);
+        return userRepository.getWithVotes(id);
     }
 }

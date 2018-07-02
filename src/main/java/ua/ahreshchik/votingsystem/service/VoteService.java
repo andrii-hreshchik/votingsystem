@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface VoteService {
 
-    Vote create(Vote user);
+    Vote create(Vote vote);
 
     Vote get(int id) throws NotFoundException;
 
