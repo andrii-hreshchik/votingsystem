@@ -13,8 +13,13 @@ import java.util.List;
 @Service
 public class VoteServiceImpl implements VoteService {
 
-    @Autowired
+
     VoteRepository voteRepository;
+
+    @Autowired
+    public VoteServiceImpl(VoteRepository voteRepository) {
+        this.voteRepository = voteRepository;
+    }
 
     @Override
     public Vote create(Vote vote) {

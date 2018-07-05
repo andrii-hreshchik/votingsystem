@@ -1,7 +1,9 @@
 package ua.ahreshchik.votingsystem.model;
 
 import org.hibernate.annotations.BatchSize;
+import org.hibernate.validator.constraints.SafeHtml;
 import org.springframework.util.CollectionUtils;
+import ua.ahreshchik.votingsystem.View;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -16,9 +18,6 @@ import java.util.*;
 @Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = "email", name = "user_unique_email_idx")})
 public class User extends AbstractBaseEntity {
 
-    //TODO @SafeHtml for all attribs
-
-
     @NotBlank
     @Size(min = 2, max = 100)
     @Column(name = "name", nullable = false)
@@ -29,6 +28,7 @@ public class User extends AbstractBaseEntity {
     @Email
     @NotBlank
     @Size(max = 100)
+    @SafeHtml(groups = {View.Web.class})
     private String email;
 
     @Column(name = "password", nullable = false)

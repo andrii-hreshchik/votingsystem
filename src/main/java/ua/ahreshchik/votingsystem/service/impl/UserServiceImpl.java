@@ -1,26 +1,45 @@
 package ua.ahreshchik.votingsystem.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import ua.ahreshchik.votingsystem.AuthorizedUser;
 import ua.ahreshchik.votingsystem.model.User;
 import ua.ahreshchik.votingsystem.repository.UserRepository;
 import ua.ahreshchik.votingsystem.service.UserService;
+import ua.ahreshchik.votingsystem.to.UserTo;
 import ua.ahreshchik.votingsystem.util.exception.NotFoundException;
 
 import java.util.List;
 
-@Service
-public class UserServiceImpl implements UserService {
+import static ua.ahreshchik.votingsystem.util.UserUtil.prepareToSave;
+import static ua.ahreshchik.votingsystem.util.UserUtil.updateFromTo;
+
+
+//TODO cache
+
+
+@Service("userService")
+public class UserServiceImpl implements UserService, UserDetailsService {
+
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    UserRepository userRepository;
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @Override
     public User create(User user) {
         Assert.notNull(user, "user must be not null");
-        //prepare to save
-        return userRepository.save(user);
+        return userRepository.save(prepareToSave(user, passwordEncoder));
     }
 
     @Override
@@ -42,6 +61,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
+    public void update(UserTo userTo) {
+        User user = updateFromTo(get(userTo.getId()), userTo);
+        userRepository.save(prepareToSave(user, passwordEncoder));
+
+    }
+
+    @Override
     public User getByEmail(String email) throws NotFoundException {
         Assert.notNull(email, "email must not be null");
         return userRepository.getByEmail(email);
@@ -55,5 +82,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getWithVotes(int id) {
         return userRepository.getWithVotes(id);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        User user = userRepository.getByEmail(email.toLowerCase());
+        if (user == null) {
+            throw new UsernameNotFoundException("User with " + email + "is not found");
+        } else return new AuthorizedUser(user);
     }
 }

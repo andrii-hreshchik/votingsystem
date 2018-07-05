@@ -13,8 +13,13 @@ import java.util.List;
 @Service
 public class MealServiceImpl implements MealService {
 
-    @Autowired
+
     MealRepository mealRepository;
+
+    @Autowired
+    public MealServiceImpl(MealRepository mealRepository) {
+        this.mealRepository = mealRepository;
+    }
 
     @Override
     public Meal create(Meal meal) {

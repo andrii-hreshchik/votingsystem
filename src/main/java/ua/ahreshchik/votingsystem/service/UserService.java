@@ -1,6 +1,7 @@
 package ua.ahreshchik.votingsystem.service;
 
 import ua.ahreshchik.votingsystem.model.User;
+import ua.ahreshchik.votingsystem.to.UserTo;
 import ua.ahreshchik.votingsystem.util.exception.NotFoundException;
 
 import java.util.List;
@@ -12,6 +13,8 @@ public interface UserService {
     User get(int id) throws NotFoundException;
 
     void update(User user);
+
+    void update(UserTo user);
 
     void delete(int id) throws NotFoundException;
 

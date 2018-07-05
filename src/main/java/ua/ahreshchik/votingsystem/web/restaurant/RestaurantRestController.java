@@ -11,8 +11,8 @@ import ua.ahreshchik.votingsystem.util.exception.NotFoundException;
 import java.util.List;
 
 
-@RestController
-@RequestMapping(value = RestaurantRestController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
+//@RestController
+//@RequestMapping(value = RestaurantRestController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class RestaurantRestController extends AbstractRestaurantController {
     static final String REST_URL = "/restaurants";
 
