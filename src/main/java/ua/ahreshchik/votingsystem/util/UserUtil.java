@@ -2,10 +2,15 @@ package ua.ahreshchik.votingsystem.util;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.util.StringUtils;
+import ua.ahreshchik.votingsystem.model.Role;
 import ua.ahreshchik.votingsystem.model.User;
 import ua.ahreshchik.votingsystem.to.UserTo;
 
 public class UserUtil {
+
+    public static User createNewFromTo(UserTo newUser) {
+        return new User(null, newUser.getName(), newUser.getEmail().toLowerCase(), newUser.getPassword(), Role.ROLE_USER);
+    }
 
     public static UserTo asTo(User user) {
         return new UserTo(user.getId(), user.getName(), user.getEmail(), user.getPassword());

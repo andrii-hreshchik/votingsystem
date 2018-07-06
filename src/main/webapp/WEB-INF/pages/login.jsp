@@ -1,5 +1,3 @@
-<%--region Description--%>
-<%--<editor-fold desc="Description">--%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
@@ -18,7 +16,7 @@
 
 <form class="form-signin" action="spring_security_check" method="post">
 
-    <img class="mb-4" src="/resources/images/logo.png" alt="" width="72" height="72">
+    <img class="mb-4" src="/resources/images/dish.png" alt="" width="72" height="72">
     <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
 
     <label for="inputName" class="sr-only">User email</label>
@@ -30,16 +28,22 @@
            required>
 
     <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-    <button class="btn btn-lg btn-block btn-outline-primary" type="submit">Sign up</button>
 
+    <a class="btn btn-lg btn-block btn-outline-primary" href="register">Sign up</a>
 
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Login as User</button>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Login as Admin</button>
+    <button class="btn btn-lg btn-primary btn-block" type="submit" onclick=login("user@gmail.com","password")>Login as
+        User
+    </button>
+    <button class="btn btn-lg btn-primary btn-block" type="submit" onclick=login("admin@gmail.com","password")>Login as
+        Admin
+    </button>
 
-    <p class="mt-5 mb-3 text-muted">&copy; 2018</p>
 </form>
-
 </body>
+<script>
+    function login(email, password) {
+        $('input[name="username"]').val(email);
+        $('input[name="password"]').val(password);
+    }
+</script>
 </html>
-<%--</editor-fold>--%>
-<%--endregion--%>
