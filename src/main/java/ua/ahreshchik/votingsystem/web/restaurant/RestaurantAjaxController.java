@@ -40,5 +40,4 @@ public class RestaurantAjaxController extends AbstractRestaurantController {
             super.update(restaurant, restaurant.getId());
         }
     }
-
 }

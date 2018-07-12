@@ -10,44 +10,40 @@
 </head>
 
 <body>
-<!-- Navigation bar -->
+<%--Navigation bar--%>
 <jsp:include page="fragments/navbar.jsp"/>
-<!-- DataTable JS-->
+
+<%--Spring Security principal--%>
+<sec:authentication var="principal" property="principal"/>
+
+<%--Restaurant DataTable Spript--%>
+<script src="resources/js/restaurantDT.js"></script>
+
 <main role="main">
-    <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
         <div class="container">
-
-                <h1 class="display-3">Hello, </h1>
-
+            <h1 class="display-3">Hello, ${principal.userTo.name}</h1>
             <p>This is a template for a simple marketing or informational website. It includes a large callout called a
                 jumbotron and three supporting pieces of content. Use it as a starting point to create something more
                 unique.</p>
-            <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
         </div>
     </div>
-
-    <!-- DataTable-->
-    <script>
-        $(document).ready(function () {
-            $('#datatable').DataTable()
-        });
-    </script>
     <div class="container">
-        <table class="table table-striped" id="datatable">
+        <table class="table table-striped" id="restaurant_datatable">
             <thead>
             <tr>
-                <th>Название</th>
-                <th>Описание</th>
+                <th></th>
                 <th>ID</th>
+                <th>Title</th>
+                <th>Description</th>
             </tr>
             </thead>
-        </table>
-        <hr>
+         </table>
     </div>
+    <script>
+
+    </script>
 </main>
-
-
 <jsp:include page="fragments/footer.jsp"/>
 </body>
 </html>

@@ -14,25 +14,25 @@
 </head>
 
 <body class="text-center">
-<%--<form class="form-signin">--%>
-    <form:form modelAttribute="userTo" method="post" action="register"
-               charset="utf-8" acceptCharset="UTF-8">
+<form:form modelAttribute="userTo" method="post" action="register"
+           charset="utf-8" acceptCharset="UTF-8" class="form-signin">
 
-        <img class="mb-4" src="/resources/images/pencil.png" alt="" width="72" height="72">
-        <h1 class="h3 mb-3 font-weight-normal">Registration</h1>
+    <img class="mb-4" src="/resources/images/pencil.png" alt="" width="72" height="72">
+    <h1 class="h3 mb-3 font-weight-normal">Registration</h1>
 
-        <label for="name" class="sr-only">Name</label>
-        <form:input path="name" name="name" id="name" placeholder="Your name" class="form-control"/>
+    <label for="name" class="sr-only">Name</label>
+    <form:input path="name" name="name" id="name" placeholder="Your name" class="form-control"/>
 
-        <label for="email" class="sr-only">Email</label>
-        <form:input path="email" name="email" id="email" placeholder="you@example.com" class="form-control"/>
+    <label for="email" class="sr-only">Email</label>
+    <form:input path="email" name="email" id="email" placeholder="you@example.com" class="form-control"/>
 
-        <label for="password" class="sr-only">Password</label>
-        <form:input path="password" name="password" id="password" placeholder="Your password" class="form-control" inputType="password"/>
+    <label for="password" class="sr-only">Password</label>
+    <form:input path="password" name="password" id="password" placeholder="Your password" class="form-control"
+                inputType="password"/>
 
-        <button class="btn btn-lg btn-block btn-outline-primary" type="submit">Register</button>
+    <button class="btn btn-lg btn-block btn-outline-primary" type="submit">Register</button>
+    <a class="btn btn-lg btn-block btn-outline-primary" href="login">Return to Login</a>
 
-    </form:form>
-<%--</form>--%>
+</form:form>
 </body>
 </html>

@@ -34,5 +34,7 @@ public interface VoteRepository extends JpaRepository<Vote, Integer> {
     @Override
     List<Vote> findAll();
 
+    List<Vote> getAllByRestaurantId(Integer id);
+
 
 }

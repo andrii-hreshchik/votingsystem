@@ -16,8 +16,11 @@ public interface VoteService {
 
     void delete(int id) throws NotFoundException;
 
-    //get by restaurant?
     //get by date?
     List<Vote> getAll();
+
+    List<Vote> getAllByRestaurantId(Integer id);
+
+
 
 }

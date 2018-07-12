@@ -14,7 +14,7 @@ import java.util.List;
 public class MealServiceImpl implements MealService {
 
 
-    MealRepository mealRepository;
+    private MealRepository mealRepository;
 
     @Autowired
     public MealServiceImpl(MealRepository mealRepository) {
@@ -41,11 +41,15 @@ public class MealServiceImpl implements MealService {
     @Override
     public void delete(int id) throws NotFoundException {
         mealRepository.delete(id);
-
     }
 
     @Override
     public List<Meal> getAll() {
         return mealRepository.findAll();
+    }
+
+    @Override
+    public List<Meal> getAllByRestaurantId(Integer id) {
+        return mealRepository.getAllByRestaurantId(id);
     }
 }

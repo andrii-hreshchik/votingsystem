@@ -17,4 +17,6 @@ public interface MealService {
     void delete(int id) throws NotFoundException;
 
     List<Meal> getAll();
+
+    List<Meal> getAllByRestaurantId(Integer id);
 }

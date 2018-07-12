@@ -26,8 +26,6 @@ public abstract class AbstractRestaurantController {
         return restaurantService.get(id);
     }
 
-
-    //TODO update with id
     public void update(Restaurant restaurant, int id) {
         log.info("update {}", restaurant);
         restaurantService.update(restaurant);

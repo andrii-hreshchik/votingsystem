@@ -16,6 +16,7 @@ public class AuthorizedUser extends org.springframework.security.core.userdetail
     public AuthorizedUser(User user) {
         super(user.getEmail(), user.getPassword(), true, true, true, true, user.getRoles());
         this.userTo = UserUtil.asTo(user);
+
     }
 
     public static AuthorizedUser safeGet() {
@@ -51,7 +52,7 @@ public class AuthorizedUser extends org.springframework.security.core.userdetail
         return userTo;
     }
 
-    @Override
+      @Override
     public String toString() {
         return userTo.toString();
     }

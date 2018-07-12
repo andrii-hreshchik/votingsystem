@@ -9,7 +9,7 @@ import ua.ahreshchik.votingsystem.util.exception.NotFoundException;
 
 import java.util.List;
 
-public abstract class AbstractMealContoller {
+public abstract class AbstractMealController {
     private final Logger log = LoggerFactory.getLogger(getClass());
 
     @Autowired
@@ -32,7 +32,7 @@ public abstract class AbstractMealContoller {
     }
 
     public void delete(int id) throws NotFoundException {
-        log.info("delete meal with id = {}");
+        log.info("delete meal with id = {}", id);
         mealService.delete(id);
     }
 
@@ -40,4 +40,10 @@ public abstract class AbstractMealContoller {
         log.info("get all meals");
         return mealService.getAll();
     }
+
+    public List<Meal> getAllByRestaurantId(Integer id) {
+        log.info("get all meals for restaurant with id = {}", id);
+        return mealService.getAllByRestaurantId(id);
+    }
+
 }

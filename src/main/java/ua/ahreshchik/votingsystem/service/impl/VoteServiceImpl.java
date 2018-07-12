@@ -14,7 +14,7 @@ import java.util.List;
 public class VoteServiceImpl implements VoteService {
 
 
-    VoteRepository voteRepository;
+    private VoteRepository voteRepository;
 
     @Autowired
     public VoteServiceImpl(VoteRepository voteRepository) {
@@ -46,5 +46,10 @@ public class VoteServiceImpl implements VoteService {
     @Override
     public List<Vote> getAll() {
         return voteRepository.findAll();
+    }
+
+    @Override
+    public List<Vote> getAllByRestaurantId(Integer id) {
+        return voteRepository.getAllByRestaurantId(id);
     }
 }

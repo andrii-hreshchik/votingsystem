@@ -45,4 +45,9 @@ public abstract class AbstractVoteController {
         return voteService.getAll();
     }
 
+   public List<Vote> getAllByRestaurantId(Integer id){
+        log.info("get all votes for restaurant with id = {}", id);
+        return voteService.getAllByRestaurantId(id);
+   }
+
 }
