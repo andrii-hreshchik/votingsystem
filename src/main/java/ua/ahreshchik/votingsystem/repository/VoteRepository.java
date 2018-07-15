@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ua.ahreshchik.votingsystem.model.Vote;
 import ua.ahreshchik.votingsystem.util.exception.NotFoundException;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,5 +37,12 @@ public interface VoteRepository extends JpaRepository<Vote, Integer> {
 
     List<Vote> getAllByRestaurantId(Integer id);
 
+//    @Query("SELECT v FROM Vote v WHERE v.date >= CURRENT_DATE AND v.restaurant.id=:id")
+//    List<Vote> getAllForTodayByRestaurantId(Integer id);
 
+    @Query("SELECT COUNT(v.id) FROM Vote v WHERE v.date>=CURRENT_DATE AND v.restaurant.id=:id")
+    Integer getRatingForTodayByRestaurantId(@Param("id") Integer id);
+
+    @Query("SELECT COUNT(v.id) FROM Vote v WHERE v.restaurant.id=:id")
+    Integer getRatingOverallByRestaurantId(@Param("id") Integer id);
 }

@@ -5,6 +5,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import ua.ahreshchik.votingsystem.model.Restaurant;
+import ua.ahreshchik.votingsystem.to.RestaurantTo;
+import ua.ahreshchik.votingsystem.util.RestaurantUtil;
 import ua.ahreshchik.votingsystem.util.exception.NotFoundException;
 
 import java.util.List;
@@ -20,11 +22,12 @@ public class RestaurantAjaxController extends AbstractRestaurantController {
     }
 
     @Override
-    @GetMapping(value = "/{id}")
-    public Restaurant get(@PathVariable("id") int id) throws NotFoundException {
-        return super.get(id);
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public RestaurantTo getTo(@PathVariable("id") int id) throws NotFoundException {
+        return super.getTo(id);
     }
 
+    //todo TO
     @Override
     @DeleteMapping(value = "/{id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)

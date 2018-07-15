@@ -32,8 +32,6 @@ $(document).ready(function () {
     $('#restaurant_datatable tbody').on('click', 'td.details-control', function () {
         var tr = $(this).closest('tr');
         var row = table.row(tr);
-
-
         if (row.child.isShown()) {
             //  If this row is already open - close it
             row.child.hide();
@@ -42,9 +40,10 @@ $(document).ready(function () {
         else {
             row.child(format(iTableCounter)).show();
             tr.addClass('shown');
+            var restaurantId = row.data().id;
             oInnerTable = $('#restaurant_datatable_' + iTableCounter).dataTable({
                 ajax: {
-                    url: '/ajax/meals/',
+                    url: '/ajax/meals/today/' + restaurantId,
                     dataSrc: ''
                 },
                 autoWidth: true,

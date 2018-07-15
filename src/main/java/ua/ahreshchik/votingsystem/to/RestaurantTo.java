@@ -2,14 +2,14 @@ package ua.ahreshchik.votingsystem.to;
 
 
 import org.hibernate.validator.constraints.SafeHtml;
-import ua.ahreshchik.votingsystem.model.Meal;
-import ua.ahreshchik.votingsystem.model.Vote;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.util.List;
+
+
+//TODO Redundant
 
 public class RestaurantTo extends BaseTo implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -25,28 +25,24 @@ public class RestaurantTo extends BaseTo implements Serializable {
     private String description;
 
     @NotNull
-    private List<Meal> meals;
+    private Integer ratingToday;
 
     @NotNull
-    private List<Vote> votes;
+    private Integer ratingOverall;
 
     @NotNull
-    private Integer rating;
-
-    @NotNull
-    private Integer menuPrice;
+    private Integer todayMenuPrice;
 
     public RestaurantTo() {
     }
 
-    public RestaurantTo(Integer id, String title, String description, Integer rating, Integer menuPrice, List<Meal> meals, List<Vote> votes) {
+    public RestaurantTo(Integer id, String title, String description, Integer ratingToday, Integer ratingOverall, Integer todayMenuPrice) {
         super(id);
         this.title = title;
         this.description = description;
-        this.rating = rating;
-        this.meals = meals;
-        this.votes = votes;
-        this.menuPrice = menuPrice;
+        this.ratingToday = ratingToday;
+        this.ratingOverall = ratingOverall;
+        this.todayMenuPrice = todayMenuPrice;
     }
 
     public String getTitle() {
@@ -65,36 +61,27 @@ public class RestaurantTo extends BaseTo implements Serializable {
         this.description = description;
     }
 
-
-    public List<Meal> getMeals() {
-        return meals;
+    public Integer getRatingToday() {
+        return ratingToday;
     }
 
-    public void setMeals(List<Meal> meals) {
-        this.meals = meals;
+    public void setRatingToday(Integer ratingToday) {
+        this.ratingToday = ratingToday;
     }
 
-    public List<Vote> getVotes() {
-        return votes;
+    public Integer getTodayMenuPrice() {
+        return todayMenuPrice;
     }
 
-    public void setVotes(List<Vote> votes) {
-        this.votes = votes;
+    public void setTodayMenuPrice(Integer todayMenuPrice) {
+        this.todayMenuPrice = todayMenuPrice;
     }
 
-    public Integer getRating() {
-        return rating;
+    public Integer getRatingOverall() {
+        return ratingOverall;
     }
 
-    public void setRating(Integer rating) {
-        this.rating = rating;
-    }
-
-    public Integer getMenuPrice() {
-        return menuPrice;
-    }
-
-    public void setMenuPrice(Integer menuPrice) {
-        this.menuPrice = menuPrice;
+    public void setRatingOverall(Integer ratingOverall) {
+        this.ratingOverall = ratingOverall;
     }
 }

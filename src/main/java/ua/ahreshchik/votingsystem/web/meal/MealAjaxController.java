@@ -27,7 +27,13 @@ public class MealAjaxController extends AbstractMealController {
         return super.getAll();
     }
 
-    //TODO
+    @Override
+    @GetMapping(value = "/today/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Meal> getAllForTodayByRestaurantId(@PathVariable("id") Integer id) {
+        return super.getAllForTodayByRestaurantId(id);
+    }
+
+//TODO
 //
 //    @Override
 //    public Meal create(Meal meal) {

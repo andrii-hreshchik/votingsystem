@@ -1,6 +1,7 @@
 package ua.ahreshchik.votingsystem.service;
 
 
+import org.springframework.data.jpa.repository.Query;
 import ua.ahreshchik.votingsystem.model.Vote;
 import ua.ahreshchik.votingsystem.util.exception.NotFoundException;
 
@@ -19,8 +20,9 @@ public interface VoteService {
     //get by date?
     List<Vote> getAll();
 
-    List<Vote> getAllByRestaurantId(Integer id);
+    Integer getRatingForTodayByRestaurantId(Integer id);
 
+    Integer getRatingOverallByRestaurantId(Integer id);
 
 
 }

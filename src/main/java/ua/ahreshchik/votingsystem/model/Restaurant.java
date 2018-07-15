@@ -39,7 +39,7 @@ public class Restaurant extends AbstractBaseEntity {
 
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
-    @OrderBy("dateTime DESC")
+    @OrderBy("date DESC")
     protected List<Vote> votes;
 
     public Restaurant() {

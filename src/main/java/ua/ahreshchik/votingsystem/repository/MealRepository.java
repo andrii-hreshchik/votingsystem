@@ -30,6 +30,13 @@ public interface MealRepository extends JpaRepository<Meal, Integer> {
     @Query("DELETE FROM Meal m WHERE m.id=:id")
     void delete(@Param("id") int id) throws NotFoundException;
 
+    //TODO ?
     List<Meal> getAllByRestaurantId(Integer id);
+
+    @Query("SELECT m FROM Meal m WHERE m.date >= CURRENT_DATE AND m.restaurant.id=:id")
+    List<Meal> getAllForTodayByRestaurantId(@Param("id") Integer id);
+
+    @Query("SELECT SUM (m.price) FROM Meal m WHERE m.date>=CURRENT_DATE AND m.restaurant.id=:id")
+    Integer getMealsPriceForTodayByRestaurantId(@Param("id") Integer id);
 
 }

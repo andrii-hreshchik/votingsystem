@@ -4,7 +4,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import ua.ahreshchik.votingsystem.model.Restaurant;
+import ua.ahreshchik.votingsystem.service.MealService;
 import ua.ahreshchik.votingsystem.service.RestaurantService;
+import ua.ahreshchik.votingsystem.service.VoteService;
+import ua.ahreshchik.votingsystem.to.RestaurantTo;
+import ua.ahreshchik.votingsystem.util.RestaurantUtil;
 import ua.ahreshchik.votingsystem.util.exception.NotFoundException;
 
 import java.util.List;
@@ -15,15 +19,21 @@ public abstract class AbstractRestaurantController {
     @Autowired
     private RestaurantService restaurantService;
 
+    @Autowired
+    private VoteService voteService;
+
+    @Autowired
+    private MealService mealService;
+
+
+    public RestaurantTo getTo(int id) throws NotFoundException {
+        log.info("get restaurantTo with id = {}", id);
+        return RestaurantUtil.asTo(restaurantService.get(id), mealService.getMealsPriceForTodayByRestaurantId(id), voteService.getRatingForTodayByRestaurantId(id), voteService.getRatingOverallByRestaurantId(id));
+    }
 
     public Restaurant create(Restaurant restaurant) {
         log.info("create {}", restaurant);
         return restaurantService.create(restaurant);
-    }
-
-    public Restaurant get(int id) throws NotFoundException {
-        log.info("get restaurant with id = {}", id);
-        return restaurantService.get(id);
     }
 
     public void update(Restaurant restaurant, int id) {
@@ -46,9 +56,10 @@ public abstract class AbstractRestaurantController {
         return restaurantService.getWithVotes(id);
     }
 
-   public Restaurant getWithMeals(int id) {
+    public Restaurant getWithMeals(int id) {
         log.info("get restaurant with id = {} with meals", id);
         return restaurantService.getWithMeals(id);
 
     }
+
 }

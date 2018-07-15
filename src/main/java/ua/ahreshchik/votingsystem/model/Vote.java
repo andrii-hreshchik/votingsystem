@@ -2,12 +2,9 @@ package ua.ahreshchik.votingsystem.model;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-import org.springframework.format.annotation.DateTimeFormat;
-import ua.ahreshchik.votingsystem.util.DateTimeUtil;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 
 @Entity
@@ -20,10 +17,9 @@ public class Vote extends AbstractBaseEntity {
     //todo notnull persist
     private User user;
 
-    @Column(name = "date_time", nullable = false)
-    @NotNull
-    @DateTimeFormat(pattern = DateTimeUtil.DATE_TIME_PATTERN)
-    private LocalDateTime dateTime;
+    @Column(name = "date_time", columnDefinition = "TIMESTAMP DEFAULT now()")
+    //@DateTimeFormat(pattern = DateTimeUtil.DATE_TIME_PATTERN)
+    private Date date = new Date();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id", nullable = false)
@@ -34,13 +30,13 @@ public class Vote extends AbstractBaseEntity {
     }
 
     //???
-    public Vote(LocalDateTime dateTime) {
-        this(null, dateTime);
+    public Vote(Date date) {
+        this(null, date);
     }
 
-    public Vote(Integer id, LocalDateTime dateTime) {
+    public Vote(Integer id, Date date) {
         super(id);
-        this.dateTime = dateTime;
+        this.date = date;
     }
 
     public User getUser() {
@@ -51,12 +47,12 @@ public class Vote extends AbstractBaseEntity {
         this.user = user;
     }
 
-    public LocalDateTime getDateTime() {
-        return dateTime;
+    public Date getDate() {
+        return date;
     }
 
-    public void setDateTime(LocalDateTime dateTime) {
-        this.dateTime = dateTime;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public Restaurant getRestaurant() {
@@ -71,7 +67,7 @@ public class Vote extends AbstractBaseEntity {
     public String toString() {
         return "Vote{" +
                 "user=" + user.getName() +
-                ", dateTime=" + dateTime +
+                ", dateTime=" + date +
                 ", restaurant=" + restaurant.getTitle() +
                 ", id=" + id +
                 '}';

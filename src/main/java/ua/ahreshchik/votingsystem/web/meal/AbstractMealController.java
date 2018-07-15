@@ -46,4 +46,9 @@ public abstract class AbstractMealController {
         return mealService.getAllByRestaurantId(id);
     }
 
+    public List<Meal> getAllForTodayByRestaurantId(Integer id) {
+        log.info("get all meal for today for restaurant with id = {}", id);
+        return mealService.getAllForTodayByRestaurantId(id);
+    }
+
 }

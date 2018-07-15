@@ -34,7 +34,7 @@ CREATE TABLE restaurants
   id          INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
   title       VARCHAR                 NOT NULL,
   description TEXT                    NOT NULL,
-  --   rating      INTEGER                 NOT NULL,
+
   date_time   TIMESTAMP DEFAULT now() NOT NULL
 );
 

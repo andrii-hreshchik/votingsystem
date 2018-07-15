@@ -23,7 +23,6 @@ public class User extends AbstractBaseEntity {
     @Column(name = "name", nullable = false)
     private String name;
 
-
     @Column(name = "email", nullable = false, unique = true)
     @Email
     @NotBlank
@@ -50,7 +49,7 @@ public class User extends AbstractBaseEntity {
 
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-    @OrderBy("dateTime DESC")
+    @OrderBy("date DESC")
     protected List<Vote> votes;
 
     public User() {

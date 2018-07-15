@@ -13,7 +13,6 @@ import java.util.List;
 @Service
 public class MealServiceImpl implements MealService {
 
-
     private MealRepository mealRepository;
 
     @Autowired
@@ -51,5 +50,15 @@ public class MealServiceImpl implements MealService {
     @Override
     public List<Meal> getAllByRestaurantId(Integer id) {
         return mealRepository.getAllByRestaurantId(id);
+    }
+
+    @Override
+    public List<Meal> getAllForTodayByRestaurantId(Integer id) {
+        return mealRepository.getAllForTodayByRestaurantId(id);
+    }
+
+    @Override
+    public Integer getMealsPriceForTodayByRestaurantId(Integer id) {
+        return mealRepository.getMealsPriceForTodayByRestaurantId(id);
     }
 }

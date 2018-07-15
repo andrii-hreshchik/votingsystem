@@ -13,7 +13,6 @@ import java.util.List;
 @Service
 public class VoteServiceImpl implements VoteService {
 
-
     private VoteRepository voteRepository;
 
     @Autowired
@@ -49,7 +48,12 @@ public class VoteServiceImpl implements VoteService {
     }
 
     @Override
-    public List<Vote> getAllByRestaurantId(Integer id) {
-        return voteRepository.getAllByRestaurantId(id);
+    public Integer getRatingForTodayByRestaurantId(Integer id) {
+        return voteRepository.getRatingForTodayByRestaurantId(id);
+    }
+
+    @Override
+    public Integer getRatingOverallByRestaurantId(Integer id) {
+        return voteRepository.getRatingOverallByRestaurantId(id);
     }
 }

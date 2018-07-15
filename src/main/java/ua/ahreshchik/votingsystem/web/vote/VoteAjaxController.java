@@ -40,9 +40,4 @@ public class VoteAjaxController extends AbstractVoteController {
         return super.getAll();
     }
 
-    @Override
-    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Vote> getAllByRestaurantId(@PathVariable("id") Integer id) {
-        return super.getAllByRestaurantId(id);
-    }
 }
