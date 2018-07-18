@@ -1,13 +1,11 @@
 package ua.ahreshchik.votingsystem.model;
 
-import org.springframework.format.annotation.DateTimeFormat;
-import ua.ahreshchik.votingsystem.util.DateTimeUtil;
+import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 
@@ -27,11 +25,19 @@ public class Restaurant extends AbstractBaseEntity {
     private String description;
 
 
-    @Column(name = "date_time", nullable = false)
-    @NotNull
-    @DateTimeFormat(pattern = DateTimeUtil.DATE_TIME_PATTERN)
-    private LocalDateTime dateTime;
+    @Formula("(SELECT COUNT(v.id) FROM votes v WHERE v.date_time>=CURRENT_DATE AND v.restaurant_id=id)")
+    private Integer todayRating;
 
+    @Formula("(SELECT COUNT(v.id) FROM votes v WHERE v.restaurant_id=id)")
+    private Integer overallRating;
+
+    @Formula("(SELECT SUM(m.price) FROM meals m WHERE m.date_time>=CURRENT_DATE AND m.restaurant_id=id)")
+    private Integer todayMenuPrice;
+
+
+    @Column(name = "date_time", nullable = false)
+    //    @DateTimeFormat(pattern = DateTimeUtil.DATE_TIME_PATTERN)
+    private Date date = new Date();
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
     @OrderBy("description DESC")
@@ -42,18 +48,21 @@ public class Restaurant extends AbstractBaseEntity {
     @OrderBy("date DESC")
     protected List<Vote> votes;
 
+
     public Restaurant() {
+
+
     }
 
-    public Restaurant(String title, String description, LocalDateTime dateTime) {
-        this(null, title, description, dateTime);
+    public Restaurant(String title, String description, Date date) {
+        this(null, title, description, date);
     }
 
-    public Restaurant(Integer id, String title, String description, LocalDateTime dateTime) {
+    public Restaurant(Integer id, String title, String description, Date date) {
         super(id);
         this.title = title;
         this.description = description;
-        this.dateTime = dateTime;
+        this.date = date;
     }
 
     public void setTitle(String title) {
@@ -64,8 +73,8 @@ public class Restaurant extends AbstractBaseEntity {
         this.description = description;
     }
 
-    public void setDateTime(LocalDateTime dateTime) {
-        this.dateTime = dateTime;
+    public void setDate(Date dateTime) {
+        this.date = dateTime;
     }
 
     public String getTitle() {
@@ -76,8 +85,8 @@ public class Restaurant extends AbstractBaseEntity {
         return description;
     }
 
-    public LocalDateTime getDateTime() {
-        return dateTime;
+    public Date getDate() {
+        return date;
     }
 
     public List<Meal> getMeals() {
@@ -88,13 +97,38 @@ public class Restaurant extends AbstractBaseEntity {
         return votes;
     }
 
+
+    public Integer getTodayRating() {
+        return todayRating;
+    }
+
+    public void setTodayRating(Integer todayRating) {
+        this.todayRating = todayRating;
+    }
+
+    public Integer getOverallRating() {
+        return overallRating;
+    }
+
+    public void setOverallRating(Integer overallRating) {
+        this.overallRating = overallRating;
+    }
+
+    public Integer getTodayMenuPrice() {
+        return todayMenuPrice;
+    }
+
+    public void setTodayMenuPrice(Integer todayMenuPrice) {
+        this.todayMenuPrice = todayMenuPrice;
+    }
+
     @Override
     public String toString() {
         return "Restaurant{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
-                ", dateTime=" + dateTime +
+                ", dateTime=" + date +
                 ", meals=" + meals +
                 ", votes=" + votes +
                 '}';

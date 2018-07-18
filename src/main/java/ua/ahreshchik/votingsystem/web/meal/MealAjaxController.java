@@ -1,11 +1,9 @@
 package ua.ahreshchik.votingsystem.web.meal;
 
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ua.ahreshchik.votingsystem.model.Meal;
 import ua.ahreshchik.votingsystem.util.exception.NotFoundException;
 
@@ -32,6 +30,16 @@ public class MealAjaxController extends AbstractMealController {
     public List<Meal> getAllForTodayByRestaurantId(@PathVariable("id") Integer id) {
         return super.getAllForTodayByRestaurantId(id);
     }
+
+    @Override
+    @DeleteMapping(value = "/{id}")
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable("id") int id) throws NotFoundException {
+        super.delete(id);
+    }
+
+
+
 
 //TODO
 //

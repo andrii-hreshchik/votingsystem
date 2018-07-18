@@ -3,10 +3,10 @@ package ua.ahreshchik.votingsystem.web.restaurant;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import ua.ahreshchik.votingsystem.View;
 import ua.ahreshchik.votingsystem.model.Restaurant;
-import ua.ahreshchik.votingsystem.to.RestaurantTo;
-import ua.ahreshchik.votingsystem.util.RestaurantUtil;
 import ua.ahreshchik.votingsystem.util.exception.NotFoundException;
 
 import java.util.List;
@@ -21,13 +21,20 @@ public class RestaurantAjaxController extends AbstractRestaurantController {
         return super.getAll();
     }
 
+
     @Override
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public RestaurantTo getTo(@PathVariable("id") int id) throws NotFoundException {
-        return super.getTo(id);
+    public Restaurant get(@PathVariable("id") int id) throws NotFoundException {
+        return super.get(id);
     }
 
-    //todo TO
+//    @Override
+//    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+//    public RestaurantTo getTo(@PathVariable("id") int id) throws NotFoundException {
+//        return super.getTo(id);
+//    }
+
+
     @Override
     @DeleteMapping(value = "/{id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
@@ -35,8 +42,10 @@ public class RestaurantAjaxController extends AbstractRestaurantController {
         super.delete(id);
     }
 
+
+
     @PostMapping
-    public void createOrUpdate(Restaurant restaurant) {
+    public void createOrUpdate(@Validated(View.Web.class) Restaurant restaurant) {
         if (restaurant.isNew()) {
             super.create(restaurant);
         } else {

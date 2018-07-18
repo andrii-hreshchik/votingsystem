@@ -38,6 +38,15 @@
         Admin
     </button>
 
+    <br/><br/>
+    <p>Доступные роли:</p>
+
+    <b>ROLE_ADMIN</b> <br/>
+    Login:<span style="color: royalblue">admin@gmail.com</span> Password: <span style="color: royalblue">password</span>
+    <br/>
+    <b>ROLE_USER</b> <br/>
+    Login: <span style="color: royalblue">user@gmail.com</span> Password: <span style="color: royalblue">password</span>
+
 </form>
 </body>
 <script>

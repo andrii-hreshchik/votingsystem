@@ -3,7 +3,6 @@ package ua.ahreshchik.votingsystem.web.vote;
 
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ua.ahreshchik.votingsystem.model.Vote;
@@ -11,7 +10,8 @@ import ua.ahreshchik.votingsystem.model.Vote;
 import java.util.List;
 
 @RestController
-@RequestMapping("ajax/votes")
+@RequestMapping(value = "ajax/votes")
+//@PreAuthorize("hasRole('ROLE_ADMIN')")
 public class VoteAjaxController extends AbstractVoteController {
 
 //    @Override
@@ -33,6 +33,7 @@ public class VoteAjaxController extends AbstractVoteController {
 //    public void delete(int id) throws NotFoundException {
 //        super.delete(id);
 //    }
+
 
     @Override
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)

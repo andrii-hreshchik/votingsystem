@@ -4,10 +4,12 @@ body {
 }
 
 td.details-control {
-    background: url(/resources/images/line_plus.png) no-repeat center center;
-    cursor: pointer;
-}
+     background: url(/resources/images/angle-double-down-solid.svg) no-repeat center center;
+     background-size: 50% 50%;
+     cursor: pointer;
+ }
 
 tr.shown td.details-control {
-    background: url(/resources/images/line_minus.png) no-repeat center center;
+    background: url(/resources/images/angle-double-up-solid.svg) no-repeat center center;
+    background-size: 50% 50%;
 }

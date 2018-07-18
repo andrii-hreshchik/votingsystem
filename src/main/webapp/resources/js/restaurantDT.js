@@ -1,12 +1,16 @@
 function format(table_id) {
     return '<table class="table table-striped" id="restaurant_datatable_' + table_id + '">' +
-        '<thead><tr><th>ID</th><th>Description</th><th>Price</th></tr></thead>' +
+        '<thead>' +
+        '<tr>' +
+        '<th>Description</th>' +
+        '<th>Price</th>' +
+        '</tr>' +
+        '</thead>' +
         '</table>';
 }
 
 var iTableCounter = 1;
 var oInnerTable;
-
 
 $(document).ready(function () {
     TableHtml = $('#restaurant_datatable').html();
@@ -17,17 +21,23 @@ $(document).ready(function () {
         },
         rowId: 'id',
         columns: [
+            {data: 'title'},
+            {data: 'description'},
+            {data: 'todayMenuPrice'},
+            {data: 'todayRating'},
+            {data: 'overallRating'},
             {
                 className: 'details-control',
                 orderable: false,
                 data: null,
                 defaultContent: ''
             },
-            {data: 'id'},
-            {data: 'title'},
-            {data: 'description'}
+            {
+                data: null,
+                defaultContent: ''
+            }
         ],
-        order: [[1, 'asc']]
+        order: [[5, 'desc']]
     });
     $('#restaurant_datatable tbody').on('click', 'td.details-control', function () {
         var tr = $(this).closest('tr');
@@ -56,7 +66,6 @@ $(document).ready(function () {
                 scrollY: false,
                 searching: false,
                 columns: [
-                    {data: 'id'},
                     {data: 'description'},
                     {data: 'price'}
                 ]
