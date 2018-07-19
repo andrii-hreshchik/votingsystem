@@ -37,6 +37,7 @@ public abstract class AbstractRestaurantController {
         return restaurantService.create(restaurant);
     }
 
+    //TODO with id
     public void update(Restaurant restaurant, int id) {
         log.info("update {}", restaurant);
         restaurantService.update(restaurant);
@@ -51,16 +52,4 @@ public abstract class AbstractRestaurantController {
         log.info("get all restaurants");
         return restaurantService.getAll();
     }
-
-    public Restaurant getWithVotes(int id) {
-        log.info("get restaurant with id = {} with votes", id);
-        return restaurantService.getWithVotes(id);
-    }
-
-    public Restaurant getWithMeals(int id) {
-        log.info("get restaurant with id = {} with meals", id);
-        return restaurantService.getWithMeals(id);
-
-    }
-
 }

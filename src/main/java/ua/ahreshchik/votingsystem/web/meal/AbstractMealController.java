@@ -9,6 +9,8 @@ import ua.ahreshchik.votingsystem.util.exception.NotFoundException;
 
 import java.util.List;
 
+import static ua.ahreshchik.votingsystem.util.ValidationUtil.assureIdConsistent;
+
 public abstract class AbstractMealController {
     private final Logger log = LoggerFactory.getLogger(getClass());
 
@@ -26,9 +28,10 @@ public abstract class AbstractMealController {
     }
 
     //TODO with id
-    public void update(Meal meal, int id) {
+    public void update(Meal meal, int id, int restaurantId) {
         log.info("update {}", meal);
-        mealService.update(meal);
+        assureIdConsistent(meal, id);
+        mealService.update(meal, restaurantId);
     }
 
     public void delete(int id) throws NotFoundException {

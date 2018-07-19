@@ -5,19 +5,25 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import ua.ahreshchik.votingsystem.model.Meal;
 import ua.ahreshchik.votingsystem.repository.MealRepository;
+import ua.ahreshchik.votingsystem.repository.RestaurantRepository;
 import ua.ahreshchik.votingsystem.service.MealService;
 import ua.ahreshchik.votingsystem.util.exception.NotFoundException;
 
 import java.util.List;
+
+import static ua.ahreshchik.votingsystem.util.ValidationUtil.checkNotFoundWithId;
 
 @Service
 public class MealServiceImpl implements MealService {
 
     private MealRepository mealRepository;
 
+    private RestaurantRepository restaurantRepository;
+
     @Autowired
-    public MealServiceImpl(MealRepository mealRepository) {
+    public MealServiceImpl(MealRepository mealRepository, RestaurantRepository restaurantRepository) {
         this.mealRepository = mealRepository;
+        this.restaurantRepository = restaurantRepository;
     }
 
     @Override
@@ -32,9 +38,9 @@ public class MealServiceImpl implements MealService {
     }
 
     @Override
-    public void update(Meal meal) {
-        Assert.notNull(meal, "meal must not be null");
-        mealRepository.save(meal);
+    public Meal update(Meal meal, int restaurantId) {
+        meal.setRestaurant(restaurantRepository.getOne(restaurantId));
+        return checkNotFoundWithId(mealRepository.save(meal), meal.getId());
     }
 
     @Override

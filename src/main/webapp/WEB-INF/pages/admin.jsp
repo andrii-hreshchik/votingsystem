@@ -21,6 +21,20 @@
 
 <br><br><br>
 
+<div class="container text-left">
+    <form>
+        <div class="form-group">
+            <label for="title_new">Title</label>
+            <input type="text" class="form-control-sm" id="title_new" placeholder="Title">
+        </div>
+        <div class="form-group">
+            <label for="description_new">Description</label>
+            <input type="text" class="form-control-sm" id="description_new" placeholder="Description">
+        </div>
+        <button type="submit" class="btn btn-primary">Create new restaurant</button>
+    </form>
+</div>
+
 <div class="container text-center">
     <table class="table table-striped" id="admin_datatable">
         <thead>
@@ -39,8 +53,9 @@
     </table>
 </div>
 
-<%--Modal window Edit Restaurant--%>
-<div class="modal fade" id="editRow" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<%--Modal window edit Restaurant--%>
+<div class="modal fade" id="editRow" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">

@@ -23,9 +23,18 @@ $(document).ready(function () {
         columns: [
             {data: 'title'},
             {data: 'description'},
-            {data: 'todayMenuPrice'},
-            {data: 'todayRating'},
-            {data: 'overallRating'},
+            {
+                data: 'todayMenuPrice',
+                defaultContent: 'No menu for today'
+            },
+            {
+                data: 'todayRating',
+                defaultContent: '0'
+            },
+            {
+                data: 'overallRating',
+                defaultContent: '0'
+            },
             {
                 className: 'details-control',
                 orderable: false,

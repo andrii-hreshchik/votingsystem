@@ -16,7 +16,6 @@ $.ajaxSetup({
 });
 
 $(document).ready(function () {
-    TableHtml = $('#admin_datatable').html();
     dataTableApi = $('#admin_datatable').DataTable({
         ajax: {
             url: ajaxRestaurantsUrl,
@@ -28,9 +27,18 @@ $(document).ready(function () {
             {data: 'title'},
             {data: 'description'},
             {data: 'date'},
-            {data: 'todayMenuPrice'},
-            {data: 'todayRating'},
-            {data: 'overallRating'},
+            {
+                data: 'todayMenuPrice',
+                defaultContent: 'No menu for today'
+            },
+            {
+                data: 'todayRating',
+                defaultContent: '0'
+            },
+            {
+                data: 'overallRating',
+                defaultContent: '0'
+            },
 
             {
                 render: menuBtn,
