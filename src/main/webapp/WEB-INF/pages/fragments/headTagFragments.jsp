@@ -2,7 +2,8 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 
-
+<link rel="shortcut icon" href='<c:url value="/resources/images/favicon.ico" />'     type="image/x-icon">
+<link rel="icon" href='<c:url value="/resources/images/favicon.ico" />' type="image/x-icon">
 <link rel="stylesheet" href="webjars/bootstrap/4.1.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="webjars/datatables/1.10.19/css/dataTables.bootstrap4.min.css">
 <link rel="stylesheet" href="webjars/noty/3.1.4/lib/noty.css"/>
