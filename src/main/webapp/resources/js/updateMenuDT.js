@@ -2,10 +2,9 @@ var ajaxMealsUrl = '/ajax/meals/';
 
 
 $(document).ready(function () {
-    TableHtml = $('#admin_menu_datatable').html();
-    dataTableApi = $('#admin_menu_datatable').DataTable({
+       dataTableApi = $('#admin_menu_datatable').DataTable({
         ajax: {
-            url: 'ajax/meals/today/' + restaurantId,
+            url: 'ajax/meals/today/restaurant/' + restaurantId,
             dataSrc: ''
         },
         rowId: 'id',
@@ -42,6 +41,12 @@ function deleteBtn(data, type, row) {
 
 }
 
+function createMeal() {
+    form.find(":input").val("");
+    $('#modalTitle').html("Create meal");
+    $('#editRow').modal();
+}
+
 function makeEditable() {
     form = $('#detailsForm');
     $.ajaxSetup({cache: false});
@@ -57,6 +62,7 @@ function deleteRow(id) {
 }
 
 function updateRow(id) {
+    $('#modalTitle').html("Update meal");
     $.get(ajaxMealsUrl + id, function (data) {
         $.each(data, function (key, value) {
             form.find("input[name='" + key + "']").val(value);
@@ -77,7 +83,7 @@ function save() {
 }
 
 function updateTable() {
-    $.get('ajax/meals/today/' + restaurantId, updateTableByData);
+    $.get('ajax/meals/today/restaurant/' + restaurantId, updateTableByData);
 }
 
 

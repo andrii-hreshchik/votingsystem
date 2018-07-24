@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import ua.ahreshchik.votingsystem.model.Vote;
+import ua.ahreshchik.votingsystem.repository.RestaurantRepository;
+import ua.ahreshchik.votingsystem.repository.UserRepository;
 import ua.ahreshchik.votingsystem.repository.VoteRepository;
 import ua.ahreshchik.votingsystem.service.VoteService;
 import ua.ahreshchik.votingsystem.util.exception.NotFoundException;
@@ -15,14 +17,22 @@ public class VoteServiceImpl implements VoteService {
 
     private VoteRepository voteRepository;
 
+    private RestaurantRepository restaurantRepository;
+
+    private UserRepository userRepository;
+
     @Autowired
-    public VoteServiceImpl(VoteRepository voteRepository) {
+    public VoteServiceImpl(VoteRepository voteRepository, RestaurantRepository restaurantRepository, UserRepository userRepository) {
         this.voteRepository = voteRepository;
+        this.restaurantRepository = restaurantRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
-    public Vote create(Vote vote) {
+    public Vote create(Vote vote, int restaurantId, int userId) {
         Assert.notNull(vote, "vote must not be null");
+        vote.setRestaurant(restaurantRepository.getOne(restaurantId));
+        vote.setUser(userRepository.getOne(userId));
         return voteRepository.save(vote);
     }
 

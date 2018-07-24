@@ -85,12 +85,20 @@ function goToMenu(id) {
 }
 
 function updateRow(id) {
+    $('#modalTitle').html("Update restaurant");
     $.get(ajaxRestaurantsUrl + id, function (data) {
         $.each(data, function (key, value) {
             form.find("input[name='" + key + "']").val(value);
         });
         $('#editRow').modal();
     });
+}
+
+
+function createRestaurant() {
+    form.find(":input").val("");
+    $('#modalTitle').html("Create restaurant");
+    $('#editRow').modal();
 }
 
 function deleteRow(id) {

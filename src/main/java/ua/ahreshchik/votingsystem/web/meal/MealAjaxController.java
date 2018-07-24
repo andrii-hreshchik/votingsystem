@@ -15,14 +15,6 @@ import java.util.List;
 @RequestMapping(value = "ajax/meals")
 public class MealAjaxController extends AbstractMealController {
 
-    //TODO finish controller
-
-//    @Override
-//    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-//    public List<Meal> getAllByRestaurantId(@PathVariable("id") Integer id) throws NotFoundException {
-//        return super.getAllByRestaurantId(id);
-//    }
-
     @Override
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Meal get(@PathVariable("id") int id) throws NotFoundException {
@@ -37,9 +29,8 @@ public class MealAjaxController extends AbstractMealController {
     }
 
 
-    //TODO refactor to /today/restaurant/
     @Override
-    @GetMapping(value = "/today/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/today/restaurant/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Meal> getAllForTodayByRestaurantId(@PathVariable("id") Integer id) {
         return super.getAllForTodayByRestaurantId(id);
     }
@@ -54,7 +45,7 @@ public class MealAjaxController extends AbstractMealController {
     @PostMapping(value = "/{id}")
     public void createOrUpdate(@Validated(View.Web.class) Meal meal, @PathVariable("id") int restaurantId) {
         if (meal.isNew()) {
-            super.create(meal);
+            super.create(meal, restaurantId);
         } else {
             super.update(meal, meal.getId(), restaurantId);
         }

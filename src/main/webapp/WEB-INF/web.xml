@@ -7,6 +7,10 @@
     <display-name>VotingSystem</display-name>
 
     <context-param>
+        <param-name>spring.profiles.default</param-name>
+        <param-value>postgres,springdata</param-value>
+    </context-param>
+    <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
             classpath:spring/spring-app.xml
@@ -59,7 +63,6 @@
         <filter-name>springSecurityFilterChain</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-
 
 
 </web-app>

@@ -1,6 +1,8 @@
 package ua.ahreshchik.votingsystem.model;
 
 import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.springframework.util.CollectionUtils;
 import ua.ahreshchik.votingsystem.View;
@@ -13,7 +15,7 @@ import javax.validation.constraints.Size;
 import java.util.*;
 
 
-//todo cache
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Entity
 @Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = "email", name = "user_unique_email_idx")})
 public class User extends AbstractBaseEntity {
@@ -56,7 +58,6 @@ public class User extends AbstractBaseEntity {
 
     }
 
-    //???
     public User(User u) {
         this(u.getId(), u.getName(), u.getEmail(), u.getPassword(), u.getRegistered(), u.getRoles());
     }

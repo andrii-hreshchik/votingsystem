@@ -16,7 +16,7 @@ public class Restaurant extends AbstractBaseEntity {
 
     @Column(name = "title", nullable = false, unique = true)
     @NotBlank
-    @Size(min = 5, max = 50)
+    @Size(min = 2, max = 50)
     private String title;
 
     @Column(name = "description", nullable = false)

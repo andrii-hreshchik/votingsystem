@@ -4,6 +4,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 
@@ -14,7 +15,7 @@ public class Vote extends AbstractBaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    //todo notnull persist
+    @NotNull
     private User user;
 
     @Column(name = "date_time", columnDefinition = "TIMESTAMP DEFAULT now()")
@@ -29,7 +30,6 @@ public class Vote extends AbstractBaseEntity {
     public Vote() {
     }
 
-    //???
     public Vote(Date date) {
         this(null, date);
     }

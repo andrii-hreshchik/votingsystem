@@ -1,6 +1,8 @@
 package ua.ahreshchik.votingsystem.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -21,9 +23,6 @@ import static ua.ahreshchik.votingsystem.util.UserUtil.prepareToSave;
 import static ua.ahreshchik.votingsystem.util.UserUtil.updateFromTo;
 
 
-//TODO cache
-
-
 @Service("userService")
 public class UserServiceImpl implements UserService, UserDetailsService {
 
@@ -36,6 +35,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         this.passwordEncoder = passwordEncoder;
     }
 
+    @CacheEvict(value = "users", allEntries = true)
     @Override
     public User create(User user) {
         Assert.notNull(user, "user must be not null");
@@ -49,17 +49,19 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public void update(User user) {
-        //checkNotFound
         Assert.notNull(user, "user must not be null");
         userRepository.save(user);
     }
 
+
+    @CacheEvict(value = "users", allEntries = true)
     @Override
     public void delete(int id) throws NotFoundException {
         userRepository.delete(id);
 
     }
 
+    @CacheEvict(value = "users", allEntries = true)
     @Override
     @Transactional
     public void update(UserTo userTo) {
@@ -74,6 +76,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return userRepository.getByEmail(email);
     }
 
+    @Cacheable("users")
     @Override
     public List<User> getAll() {
         return userRepository.findAll();

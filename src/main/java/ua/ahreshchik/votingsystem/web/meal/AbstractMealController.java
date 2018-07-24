@@ -17,9 +17,9 @@ public abstract class AbstractMealController {
     @Autowired
     MealService mealService;
 
-    public Meal create(Meal meal) {
+    public Meal create(Meal meal, int restaurantId) {
         log.info("create {}", meal);
-        return mealService.create(meal);
+        return mealService.create(meal, restaurantId);
     }
 
     public Meal get(int id) throws NotFoundException {
@@ -27,7 +27,6 @@ public abstract class AbstractMealController {
         return mealService.get(id);
     }
 
-    //TODO with id
     public void update(Meal meal, int id, int restaurantId) {
         log.info("update {}", meal);
         assureIdConsistent(meal, id);

@@ -23,6 +23,8 @@ var restaurantId = <c:out value="${restaurantId}" />
 <%--Admin Menu DataTable Spript--%>
 <script src="resources/js/updateMenuDT.js"></script>
 
+<button type="submit" class="btn btn-primary" onclick="createMeal()">Create new meal</button>
+
 <div class="container">
     <table class="table table-striped" id="admin_menu_datatable">
         <thead>
@@ -36,12 +38,13 @@ var restaurantId = <c:out value="${restaurantId}" />
     </table>
 </div>
 
+
 <%--Modal window edit Meal--%>
 <div class="modal fade" id="editRow" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Create/Update meal</h5>
+                <h5 class="modal-title" id="modalTitle">Update meal</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -52,13 +55,13 @@ var restaurantId = <c:out value="${restaurantId}" />
 
                     <div class="form-group">
                         <label for="description" class="col-form-label">Description:</label>
-                        <input type="text" class="form-control" id="description" name="description" placeholder="Description">
+                        <input type="text" class="form-control" id="description" name="description" placeholder="Min 3 symbols">
                     </div>
 
                     <div class="form-group">
                         <label for="price" class="col-form-label">Price:</label>
                         <input type="text" class="form-control" id="price" name="price"
-                               placeholder="Price">
+                               placeholder="E.g.: 200">
                     </div>
                 </form>
             </div>

@@ -21,22 +21,10 @@
 
 <br><br><br>
 
-<div class="container text-left">
-    <form>
-        <div class="form-group">
-            <label for="title_new">Title</label>
-            <input type="text" class="form-control-sm" id="title_new" placeholder="Title">
-        </div>
-        <div class="form-group">
-            <label for="description_new">Description</label>
-            <input type="text" class="form-control-sm" id="description_new" placeholder="Description">
-        </div>
-        <button type="submit" class="btn btn-primary">Create new restaurant</button>
-    </form>
-</div>
+<button type="submit" class="btn btn-primary" onclick="createRestaurant()">Create new restaurant</button>
 
-<div class="container text-center">
-    <table class="table table-striped" id="admin_datatable">
+<div class="container">
+    <table class="table table-striped text-center" id="admin_datatable">
         <thead>
         <tr>
             <th>Title</th>
@@ -59,7 +47,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Create/Update restaurant</h5>
+                <h5 class="modal-title" id="modalTitle">Update restaurant</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -67,22 +55,21 @@
             <div class="modal-body">
                 <form id="detailsForm">
                     <input type="hidden" id="id" name="id">
-
                     <div class="form-group">
                         <label for="title" class="col-form-label">Title:</label>
-                        <input type="text" class="form-control" id="title" name="title" placeholder="Title">
+                        <input type="text" class="form-control" id="title" name="title" placeholder="Min 3 symbols">
                     </div>
 
                     <div class="form-group">
                         <label for="description" class="col-form-label">Description:</label>
                         <input type="text" class="form-control" id="description" name="description"
-                               placeholder="Description">
+                               placeholder="Min 5 symbols">
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" onclick="save()">Save changes</button>
+                <button type="button" class="btn btn-primary" onclick="save()">Save</button>
             </div>
         </div>
     </div>

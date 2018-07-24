@@ -3,7 +3,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-    <a class="navbar-brand" href="#">Restaurant voting system</a>
+    <span class="navbar-brand">Restaurant voting system</span>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
             aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -14,19 +14,18 @@
             <li class="nav-item active">
                 <a class="nav-link" href="/restaurants">Home <span class="sr-only">(current)</span></a>
             </li>
+            <sec:authorize access="hasRole('ROLE_USER')">
             <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
+                <a class="nav-link disabled" href="#">Administration</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#">Disabled</a>
-            </li>
+            </sec:authorize>
             <sec:authorize access="hasRole('ROLE_ADMIN')">
             <li class="nav-item dropdown active">
                 <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">Admin</a>
+                   aria-haspopup="true" aria-expanded="false">Administration</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown01">
                     <a class="dropdown-item" href="/administration">Create\Update Restaurant</a>
-                    <a class="dropdown-item" href="#">Update daily menu</a>
+                    <%--<a class="dropdown-item" href="#">Update daily menu</a>--%>
                     <a class="dropdown-item" href="/populateDB"> <span style="color: red; ">Reset database</span></a>
                 </div>
             </li>

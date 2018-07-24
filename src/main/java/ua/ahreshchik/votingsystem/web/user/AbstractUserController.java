@@ -5,7 +5,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import ua.ahreshchik.votingsystem.model.User;
 import ua.ahreshchik.votingsystem.service.UserService;
-import ua.ahreshchik.votingsystem.to.UserTo;
 import ua.ahreshchik.votingsystem.util.exception.NotFoundException;
 
 import java.util.List;
@@ -29,29 +28,10 @@ public abstract class AbstractUserController {
         return userService.get(id);
     }
 
-    public void update(User user) {
-
-    }
-
-    public void update(UserTo user) {
-
-    }
-
-    public void delete(int id) throws NotFoundException {
-
-    }
-
-    public User getByEmail(String email) throws NotFoundException {
-        log.info("get by email = {}", email);
-        return userService.getByEmail(email);
-    }
 
     public List<User> getAll() {
         log.info("get all users");
         return userService.getAll();
     }
 
-    public User getWithVotes(int id) {
-        return null;
-    }
 }

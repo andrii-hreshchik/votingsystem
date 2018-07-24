@@ -9,17 +9,13 @@ import ua.ahreshchik.votingsystem.util.exception.NotFoundException;
 
 import java.util.List;
 
+import static ua.ahreshchik.votingsystem.util.ValidationUtil.assureIdConsistent;
+
 public abstract class AbstractRestaurantController {
     private final Logger log = LoggerFactory.getLogger(getClass());
 
     @Autowired
     private RestaurantService restaurantService;
-
-//    @Autowired
-//    private VoteService voteService;
-//
-//    @Autowired
-//    private MealService mealService;
 
     public Restaurant get(int id) throws NotFoundException {
         log.info("get restaurant with id = {}", id);
@@ -27,18 +23,13 @@ public abstract class AbstractRestaurantController {
     }
 
 
-//    public RestaurantTo getTo(int id) throws NotFoundException {
-//        log.info("get restaurantTo with id = {}", id);
-//        return RestaurantUtil.asTo(restaurantService.get(id), mealService.getMealsPriceForTodayByRestaurantId(id), voteService.getRatingForTodayByRestaurantId(id), voteService.getRatingOverallByRestaurantId(id));
-//    }
-
     public Restaurant create(Restaurant restaurant) {
         log.info("create {}", restaurant);
         return restaurantService.create(restaurant);
     }
 
-    //TODO with id
     public void update(Restaurant restaurant, int id) {
+        assureIdConsistent(restaurant,id);
         log.info("update {}", restaurant);
         restaurantService.update(restaurant);
     }

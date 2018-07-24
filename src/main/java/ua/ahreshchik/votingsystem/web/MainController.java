@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
+import ua.ahreshchik.votingsystem.service.DBService;
 import ua.ahreshchik.votingsystem.to.UserTo;
 import ua.ahreshchik.votingsystem.util.UserUtil;
 import ua.ahreshchik.votingsystem.web.user.AbstractUserController;
@@ -58,11 +59,10 @@ public class MainController extends AbstractUserController {
         return "admin";
     }
 
-    //TODO finish populating
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/populateDB")
     public String populateDB() {
-        DBController.populateDB();
+        DBService.populateDB();
         return "redirect:restaurants";
     }
 
@@ -70,9 +70,8 @@ public class MainController extends AbstractUserController {
     @RequestMapping("/updateMenu")
     public String updateMenu(ModelMap modelMap, @RequestParam(value = "id") int id) {
         modelMap.addAttribute("restaurantId",id);
-        return "updateMenu";
+        return "adminMenu";
     }
-
 
     @PostMapping("/register")
     public String saveRegistration(@Valid UserTo userTo, BindingResult bindingResult, SessionStatus status, ModelMap modelMap) {
@@ -82,7 +81,7 @@ public class MainController extends AbstractUserController {
         try {
             super.create(UserUtil.createNewFromTo(userTo));
             status.setComplete();
-            return "redirect:login"; //"redirect:login?message=app.registered&username=" + userTo.getEmail();
+            return "redirect:login";
         } catch (DataIntegrityViolationException e) {
             bindingResult.rejectValue("email", "User with this email already exists");
             return "registration";

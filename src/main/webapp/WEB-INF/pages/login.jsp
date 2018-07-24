@@ -31,28 +31,29 @@
 
     <a class="btn btn-lg btn-block btn-outline-primary" href="register">Sign up</a>
 
-    <button class="btn btn-lg btn-primary btn-block" type="submit" onclick=login("user@gmail.com","password")>Login as
-        User
-    </button>
-    <button class="btn btn-lg btn-primary btn-block" type="submit" onclick=login("admin@gmail.com","password")>Login as
-        Admin
-    </button>
+    <%--<button class="btn btn-lg btn-primary btn-block" type="submit" onclick=login("user@gmail.com","password")>Login as--%>
+        <%--User--%>
+    <%--</button>--%>
+    <%--<button class="btn btn-lg btn-primary btn-block" type="submit" onclick=login("admin@gmail.com","password")>Login as--%>
+        <%--Admin--%>
+    <%--</button>--%>
 
     <br/><br/>
-    <p>Доступные роли:</p>
+    <p>Available roles:</p>
 
     <b>ROLE_ADMIN</b> <br/>
-    Login:<span style="color: royalblue">admin@gmail.com</span> Password: <span style="color: royalblue">password</span>
+    Login: <span style="color: royalblue">admin@gmail.com</span> Password: <span style="color: royalblue">password</span>
     <br/>
     <b>ROLE_USER</b> <br/>
     Login: <span style="color: royalblue">user@gmail.com</span> Password: <span style="color: royalblue">password</span>
 
 </form>
 </body>
-<script>
-    function login(email, password) {
-        $('input[name="username"]').val(email);
-        $('input[name="password"]').val(password);
-    }
-</script>
+<%--<script>--%>
+    <%--function login(email, password) {--%>
+        <%--$('input[name="username"]').val(email);--%>
+        <%--$('input[name="password"]').val(password);--%>
+    <%--}--%>
+<%--</script>--%>
+
 </html>

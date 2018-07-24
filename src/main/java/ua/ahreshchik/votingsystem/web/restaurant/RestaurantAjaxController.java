@@ -28,21 +28,12 @@ public class RestaurantAjaxController extends AbstractRestaurantController {
         return super.get(id);
     }
 
-//    @Override
-//    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-//    public RestaurantTo getTo(@PathVariable("id") int id) throws NotFoundException {
-//        return super.getTo(id);
-//    }
-
-
     @Override
     @DeleteMapping(value = "/{id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void delete(@PathVariable("id") int id) throws NotFoundException {
         super.delete(id);
     }
-
-
 
     @PostMapping
     public void createOrUpdate(@Validated(View.Web.class) Restaurant restaurant) {

@@ -35,8 +35,6 @@
 
         <webjars-bootstrap.version>4.1.1</webjars-bootstrap.version>
         <webjars-jquery.version>3.3.1-1</webjars-jquery.version>
-        <!-- TODO delete datetimepicker -->
-        <webjars-datetimepicker.version>2.5.14</webjars-datetimepicker.version>
         <webjars-noty.version>3.1.4</webjars-noty.version>
         <webjars-datatables.version>1.10.19</webjars-datatables.version>
         <webjars-font-awesome.version>5.1.0</webjars-font-awesome.version>
@@ -59,6 +57,7 @@
             </plugin>
         </plugins>
     </build>
+
 
     <dependencies>
 
@@ -100,12 +99,6 @@
             <version>3.5.2</version>
         </dependency>
 
-        <!--- DB -->
-        <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>${postgresql.version}</version>
-        </dependency>
 
         <!---Spring -->
         <dependency>
@@ -147,13 +140,6 @@
             <artifactId>spring-webmvc</artifactId>
             <version>${spring.version}</version>
         </dependency>
-
-        <!-- TODO delete tomcat dependency -->
-        <dependency>
-            <groupId>org.apache.tomcat</groupId>
-            <artifactId>tomcat-jdbc</artifactId>
-            <version>${tomcat.version}</version>
-        </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
@@ -166,8 +152,8 @@
             <version>1.2</version>
         </dependency>
 
-        <!-- WebJars -->
 
+        <!-- WebJars -->
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>jquery</artifactId>
@@ -201,18 +187,6 @@
             <version>${webjars-font-awesome.version}</version>
         </dependency>
 
-        <!--TODO delete datetimepeacker?-->
-        <dependency>
-            <groupId>org.webjars.bower</groupId>
-            <artifactId>datetimepicker</artifactId>
-            <version>${webjars-datetimepicker.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.webjars.bower</groupId>
-                    <artifactId>jquery</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
         <dependency>
             <groupId>org.webjars.bower</groupId>
             <artifactId>noty</artifactId>
@@ -236,14 +210,6 @@
             <version>${jackson.vreson}</version>
         </dependency>
 
-        <!--- Tools -->
-        <dependency>
-            <groupId>org.javamoney</groupId>
-            <artifactId>moneta</artifactId>
-            <version>1.2.1</version>
-            <type>pom</type>
-        </dependency>
-
         <!-- Logging -->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -256,5 +222,74 @@
             <version>1.2.3</version>
             <scope>test</scope>
         </dependency>
-    </dependencies>
+     </dependencies>
+
+    <!--Profiles-->
+    <profiles>
+        <!--Default profile-->
+        <profile>
+            <id>postgres</id>
+            <dependencies>
+                <dependency>
+                    <groupId>org.postgresql</groupId>
+                    <artifactId>postgresql</artifactId>
+                    <version>${postgresql.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.apache.tomcat</groupId>
+                    <artifactId>tomcat-jdbc</artifactId>
+                    <version>${tomcat.version}</version>
+                    <scope>provided</scope>
+                </dependency>
+            </dependencies>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+
+        <!--Deploy profile-->
+        <profile>
+            <id>heroku</id>
+            <!--https://devcenter.heroku.com/articles/java-webapp-runner-->
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <version>3.1.0</version>
+                        <executions>
+                            <execution>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>copy</goal>
+                                </goals>
+                                <configuration>
+                                    <artifactItems>
+                                        <artifactItem>
+                                            <groupId>com.github.jsimone</groupId>
+                                            <artifactId>webapp-runner</artifactId>
+                                            <version>8.5.31.0</version>
+                                            <destFileName>webapp-runner.jar</destFileName>
+                                        </artifactItem>
+                                    </artifactItems>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+            <dependencies>
+                <dependency>
+                    <groupId>org.postgresql</groupId>
+                    <artifactId>postgresql</artifactId>
+                    <version>${postgresql.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.apache.tomcat</groupId>
+                    <artifactId>tomcat-jdbc</artifactId>
+                    <version>${tomcat.version}</version>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
 </project>

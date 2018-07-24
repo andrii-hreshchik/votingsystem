@@ -1,0 +1,1 @@
+web:    java $JAVA_OPTS -Dspring.profiles.active="heroku,springdata" -DV_SYS_ROOT="." -jar target/dependency/webapp-runner.jar --port $PORT target/*.war

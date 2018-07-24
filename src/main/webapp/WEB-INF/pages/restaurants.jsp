@@ -23,13 +23,14 @@
     <div class="jumbotron">
         <div class="container">
             <h1 class="display-3"><b>Hello, ${principal.userTo.name}</b></h1>
-            <p>This is a template for a simple marketing or informational website. It includes a large callout called a
-                jumbotron and three supporting pieces of content. Use it as a starting point to create something more
-                unique.</p>
+            <p> This is a voting system for deciding where to have lunch.
+                It has two types of users: admin and regular users.
+                Admin can input a restaurant and it's lunch menu of the day.
+                Users can vote on which restaurant they want to have lunch at</p>
         </div>
     </div>
     <div class="container">
-        <table class="table table-striped" id="restaurant_datatable">
+        <table class="table table-striped text-center" id="restaurant_datatable">
             <thead>
             <tr>
                 <th>Title</th>

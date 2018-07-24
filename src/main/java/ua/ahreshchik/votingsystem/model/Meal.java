@@ -27,7 +27,7 @@ public class Meal extends AbstractBaseEntity {
 
 
     @Column(name = "description", nullable = false)
-    @Size(min = 5, max = 100)
+    @Size(min = 3, max = 100)
     @NotBlank
     private String description;
 
@@ -39,11 +39,6 @@ public class Meal extends AbstractBaseEntity {
 
 
     public Meal() {
-    }
-
-    //???
-    public Meal(Integer price, String description, Date date) {
-        this(null, price, description, date);
     }
 
     public Meal(Integer id, Integer price, String description, Date date) {

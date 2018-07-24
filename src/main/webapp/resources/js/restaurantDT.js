@@ -11,15 +11,16 @@ function format(table_id) {
 
 var iTableCounter = 1;
 var oInnerTable;
+var table;
 
 $(document).ready(function () {
-    TableHtml = $('#restaurant_datatable').html();
-    var table = $('#restaurant_datatable').DataTable({
+    table = $('#restaurant_datatable').DataTable({
         ajax: {
             url: '/ajax/restaurants',
             dataSrc: ''
         },
         rowId: 'id',
+        initComplete: makeEditable(),
         columns: [
             {data: 'title'},
             {data: 'description'},
@@ -42,11 +43,13 @@ $(document).ready(function () {
                 defaultContent: ''
             },
             {
+                className: 'cursor',
+                render: voteBtn,
                 data: null,
                 defaultContent: ''
             }
         ],
-        order: [[5, 'desc']]
+        order: [[4, 'desc']]
     });
     $('#restaurant_datatable tbody').on('click', 'td.details-control', function () {
         var tr = $(this).closest('tr');
@@ -62,7 +65,7 @@ $(document).ready(function () {
             var restaurantId = row.data().id;
             oInnerTable = $('#restaurant_datatable_' + iTableCounter).dataTable({
                 ajax: {
-                    url: '/ajax/meals/today/' + restaurantId,
+                    url: '/ajax/meals/today/restaurant/' + restaurantId,
                     dataSrc: ''
                 },
                 autoWidth: true,
@@ -83,3 +86,29 @@ $(document).ready(function () {
         }
     });
 });
+
+
+function voteBtn(data, type, row) {
+    if (type === 'display') {
+        return "<a onclick='voteRow(" + row.id + ");'><span class='fas fa-check'></span></a>";
+         }
+}
+
+function voteRow(id) {
+    $.ajax({
+        type: 'POST',
+        url: '/ajax/votes/create/' + id
+    }).done(updateTable());
+}
+
+function updateTable() {
+    $.get('/ajax/restaurants', updateTableByData);
+}
+
+function updateTableByData(data) {
+    table.clear().rows.add(data).draw();
+}
+
+function makeEditable() {
+    $.ajaxSetup({cache: false});
+}

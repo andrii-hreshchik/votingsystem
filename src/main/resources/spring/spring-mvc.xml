@@ -41,7 +41,7 @@
     </bean>
 
     <context:component-scan base-package="ua.ahreshchik.**.web"/>
-    <!--  all resources inside folder src/main/web/resources are mapped so they can be referred to inside JSP files -->
+
     <mvc:resources mapping="/resources/**" location="/resources/"/>
 
     <mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/"/>
@@ -49,9 +49,4 @@
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
           p:prefix="/WEB-INF/pages/"
           p:suffix=".jsp"/>
-
-
-    <!-- TODO add i18 ? -->
-
-
 </beans>

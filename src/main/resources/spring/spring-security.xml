@@ -10,11 +10,9 @@
     <http>
         <intercept-url pattern="/login" access="isAnonymous()"/>
         <intercept-url pattern="/register" access="permitAll()"/>
-
-         <intercept-url pattern="/**" access="isAuthenticated()"/>
+        <intercept-url pattern="favicon.ico" access="permitAll"/>
+        <intercept-url pattern="/**" access="isAuthenticated()"/>
         <!--<intercept-url pattern="/**" access="permitAll()"/>-->
-
-
         <form-login login-page="/login" default-target-url="/restaurants"
                     authentication-failure-url="/login?error=true"
                     login-processing-url="/spring_security_check"/>
