@@ -31,9 +31,11 @@ public class VoteServiceImpl implements VoteService {
     @Override
     public Vote create(Vote vote, int restaurantId, int userId) {
         Assert.notNull(vote, "vote must not be null");
-        vote.setRestaurant(restaurantRepository.getOne(restaurantId));
-        vote.setUser(userRepository.getOne(userId));
-        return voteRepository.save(vote);
+        if (voteRepository.getVotesCountForTodayByUserId(userId) == 0) {
+            vote.setRestaurant(restaurantRepository.getOne(restaurantId));
+            vote.setUser(userRepository.getOne(userId));
+            return voteRepository.save(vote);
+        } else return null;
     }
 
     @Override

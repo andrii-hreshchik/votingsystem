@@ -49,7 +49,7 @@ $(document).ready(function () {
                 defaultContent: ''
             }
         ],
-        order: [[4, 'desc']]
+        order: [[0, 'asc']]
     });
     $('#restaurant_datatable tbody').on('click', 'td.details-control', function () {
         var tr = $(this).closest('tr');
@@ -91,14 +91,23 @@ $(document).ready(function () {
 function voteBtn(data, type, row) {
     if (type === 'display') {
         return "<a onclick='voteRow(" + row.id + ");'><span class='fas fa-check'></span></a>";
-         }
+    }
 }
 
 function voteRow(id) {
+    $('#restId').val(id);
+    $('#modalVote').modal();
+}
+
+function save() {
+    var restId = $('#restId').val();
     $.ajax({
         type: 'POST',
-        url: '/ajax/votes/create/' + id
-    }).done(updateTable());
+        url: '/ajax/votes/create/' + restId
+    }).done(function () {
+        $('#modalVote').modal('hide');
+        updateTable();
+    });
 }
 
 function updateTable() {

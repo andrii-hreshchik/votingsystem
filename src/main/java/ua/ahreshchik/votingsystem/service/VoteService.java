@@ -22,6 +22,4 @@ public interface VoteService {
     Integer getRatingForTodayByRestaurantId(Integer id);
 
     Integer getRatingOverallByRestaurantId(Integer id);
-
-
 }

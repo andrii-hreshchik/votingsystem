@@ -28,7 +28,6 @@ public interface VoteRepository extends JpaRepository<Vote, Integer> {
     @Query("DELETE FROM Vote v WHERE v.id=:id")
     void delete(@Param("id") int id) throws NotFoundException;
 
-
     @Override
     List<Vote> findAll();
 
@@ -40,4 +39,7 @@ public interface VoteRepository extends JpaRepository<Vote, Integer> {
 
     @Query("SELECT COUNT(v.id) FROM Vote v WHERE v.restaurant.id=:id")
     Integer getRatingOverallByRestaurantId(@Param("id") Integer id);
+
+    @Query("SELECT COUNT(v.id) FROM Vote v WHERE v.user.id=:id AND v.date>=CURRENT_DATE")
+    Integer getVotesCountForTodayByUserId(@Param("id") Integer id);
 }

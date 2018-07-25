@@ -22,7 +22,6 @@ public class UserTo extends BaseTo implements Serializable {
     @SafeHtml
     private String email;
 
-
     @NotBlank
     @Size(min = 5, max = 100)
     private String password;

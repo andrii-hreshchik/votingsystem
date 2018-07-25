@@ -26,7 +26,8 @@
             <p> This is a voting system for deciding where to have lunch.
                 It has two types of users: admin and regular users.
                 Admin can input a restaurant and it's lunch menu of the day.
-                Users can vote on which restaurant they want to have lunch at</p>
+                Users can vote on which restaurant they want to have lunch at.
+                Only one vote per day is available for user.</p>
         </div>
     </div>
     <div class="container">
@@ -44,6 +45,31 @@
             </thead>
         </table>
     </div>
+
+    <%-- Modal vote window--%>
+    <div class="modal fade" id="modalVote" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle">Confirm vote</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                    <input type="hidden" id="restId" name="id" value="">
+                <div class="modal-body">
+                    User can vote only once a day.
+                    Please, confirm your voting on a restaurant.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" onclick="save()">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </main>
 <jsp:include page="fragments/footer.jsp"/>
 </body>
